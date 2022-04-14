@@ -1,26 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { PageTree } from './components/page-tree/PageTree';
+import {useTreeFetch} from "./common/fetch";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const {data, error} = useTreeFetch();
+
+    return (
+        <div>
+            {error && <h3 data-testid="error-message">{error}</h3>}
+            <PageTree data={data} />
+        </div>
+    );
 }
 
 export default App;
